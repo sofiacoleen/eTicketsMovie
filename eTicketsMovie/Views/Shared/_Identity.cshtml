@@ -1,0 +1,57 @@
+﻿@inject UserManager<ApplicationUser> UserManager;
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <span style="padding: 5px;"></span>
+    <a class="btn btn-outline-success" asp-controller="Account" asp-action="Login">
+        <i class="fa fa-sign-in"></i> Login
+    </a>
+
+    <span style="padding: 5px;"></span>
+
+    <a class="btn btn-outline-primary" asp-controller="Account" asp-action="Register">
+        <i class="uil uil-user-plus"></i> Register
+    </a>
+}
+
+else
+{
+    <span style="padding: 5px;"></span>
+
+    @*User Profile Section*@
+    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-regular fa-user"></i> Hello, @UserManager.GetUserName(User)!
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
+                        <i class="fa-solid fa-list"></i> Orders
+                    </a>
+                </li>
+
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Users">
+                            <i class="fa fa-users"></i> Users
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </ul>
+
+    <span style="padding: 5px;"></span>
+
+    <form asp-action="Logout" asp-controller="Account">
+        <button class="btn btn-danger my-2 my-sm-2">
+            <i class="uil uil-signout"></i> Logout
+        </button>
+    </form>
+}
+
+
+

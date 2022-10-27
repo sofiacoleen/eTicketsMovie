@@ -1,0 +1,56 @@
+﻿@using eTicketsMovie.Data.ViewModels;
+@model RegisterVM;
+
+@{
+    ViewData["Title"] = "Sign up for a new account";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <p>
+                <h3>Sign Up for a New Account</h3>
+            </p>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <span><b>Sorry!</b> - @TempData["Error"]</span>
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-8 offset-2">
+                    <form asp-action="Register">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label"></label>
+                            <input asp-for="FullName" type="text" class="form-control" id="FullNameInput" aria-describedby="">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="EmailAddress" class="form-label"></label>
+                            <input asp-for="EmailAddress" type="email" class="form-control" id="EmailInput" aria-describedby="emailHelp">
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="ConfirmPassword" class="form-label"></label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-success float-end" value="Sign Up" />
+                            <a class="btn btn-secondary" asp-controller="Movies" asp-action="Index">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
